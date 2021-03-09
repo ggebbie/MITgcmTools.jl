@@ -5,7 +5,7 @@ using Dates, DataFrames, NetCDF, Printf, MeshArrays, SparseArrays, Pkg.Artifacts
 includet("ReadFiles.jl")
 includet("FormatConversions.jl")
 includet("PhysicalOceanography.jl")
-includet("moreMITgcmtools.jl")
+includet("moreMITgcmTools.jl")
 
 export MatrixInterp, convert2array, convert2gcmfaces
 export read_bin, read_flt, read_nctiles, findtiles
