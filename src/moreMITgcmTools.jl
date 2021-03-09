@@ -191,4 +191,3 @@ function nancount_gcmarray(field)
     return nancount
 end
 
-end
