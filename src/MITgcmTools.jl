@@ -1,11 +1,11 @@
 module MITgcmTools
 
-using Dates, DataFrames, NetCDF, Printf, MeshArrays, SparseArrays, Pkg.Artifacts, Revise
+using Dates, DataFrames, NetCDF, Printf, MeshArrays, SparseArrays, Pkg.Artifacts
 
-includet("ReadFiles.jl")
-includet("FormatConversions.jl")
-includet("PhysicalOceanography.jl")
-includet("moreMITgcmTools.jl")
+include("ReadFiles.jl")
+include("FormatConversions.jl")
+include("PhysicalOceanography.jl")
+include("moreMITgcmTools.jl")
 
 export MatrixInterp, convert2array, convert2gcmfaces
 export read_bin, read_flt, read_nctiles, findtiles
