@@ -1,6 +1,6 @@
 module MITgcmTools
 
-using Dates, DataFrames, NetCDF, Printf, MeshArrays, SparseArrays, Pkg.Artifacts, LaTexStrings, Revise
+using Dates, DataFrames, NetCDF, Printf, MeshArrays, SparseArrays, Pkg.Artifacts, Revise
 
 includet("ReadFiles.jl")
 includet("FormatConversions.jl")
@@ -12,7 +12,7 @@ export read_bin, read_flt, read_nctiles, findtiles
 export read_mdsio, read_meta, read_available_diagnostics
 export SeaWaterDensity, MixedLayerDepth
 export MITgcm_path, testreport
-export extract_timeseries,matmul,position_label,nancount_gcmarray
+export extract_timeseries, matmul, nancount_gcmarray
 
 p=dirname(pathof(MITgcmTools))
 artifact_toml = joinpath(p, "../Artifacts.toml")

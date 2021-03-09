@@ -178,6 +178,24 @@ function matmul(M::Array{Float64,1},flux::MeshArrays.gcmarray{Float64,1,Array{Fl
     return product
 end
 
+function position_label(lon,lat)
+    # produce label for a title by rounding to nearest whole integer.
+    if lat >= 0
+        latlbl = string(round(Integer,lat))* L"{\degree}N"
+    else
+        latlbl = string(round(Integer,-lat))* L"{\degree}S"
+    end
+
+    if lon >= 0
+        lonlbl = string(round(Integer,lon))* L"{\degree}E"
+    else
+        lonlbl = string(round(Integer,-lon))* L"{\degree}W"
+    end
+
+    lbl = latlbl * " " * lonlbl
+    return lbl
+end
+
 function nancount_gcmarray(field)
     # function nancount_gcmarray(field)
     s1,s2 = size(field)
