@@ -1,16 +1,18 @@
 module MITgcmTools
 
-using Dates, DataFrames, NetCDF, Printf, MeshArrays, SparseArrays, Pkg.Artifacts
+using Dates, DataFrames, NetCDF, Printf, MeshArrays, SparseArrays, Pkg.Artifacts, LaTexStrings, Revise
 
-include("ReadFiles.jl")
-include("FormatConversions.jl")
-include("PhysicalOceanography.jl")
+includet("ReadFiles.jl")
+includet("FormatConversions.jl")
+includet("PhysicalOceanography.jl")
+includet("moreMITgcmtools.jl")
 
 export MatrixInterp, convert2array, convert2gcmfaces
 export read_bin, read_flt, read_nctiles, findtiles
 export read_mdsio, read_meta, read_available_diagnostics
 export SeaWaterDensity, MixedLayerDepth
 export MITgcm_path, testreport
+export extract_timeseries,matmul,position_label,nancount_gcmarray
 
 p=dirname(pathof(MITgcmTools))
 artifact_toml = joinpath(p, "../Artifacts.toml")
