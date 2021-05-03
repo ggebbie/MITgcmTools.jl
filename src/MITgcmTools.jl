@@ -13,6 +13,7 @@ export read_mdsio, read_meta, read_available_diagnostics
 export SeaWaterDensity, MixedLayerDepth
 export MITgcm_path, testreport
 export extract_timeseries, matmul, nancount_gcmarray
+export read_netcdf
 
 p=dirname(pathof(MITgcmTools))
 artifact_toml = joinpath(p, "../Artifacts.toml")

@@ -20,6 +20,7 @@ function read_nctiles(fileName::String,fldName::String,mygrid::gcmgrid;
     end
 
     fileIn=@sprintf("%s.%04d.nc",fileName,1)
+    #    println(fileIn)
     x = ncread(fileIn,fldName)
     s = [size(x,i) for i in 1:ndims(x)]
     n=length(size(x))
@@ -67,6 +68,44 @@ function read_nctiles(fileName::String,fldName::String,mygrid::gcmgrid;
         end
 
     end
+
+    fld=MeshArray(mygrid,f)
+    return fld
+end
+
+"""
+    read_netcdf(fileName,fldName,mygrid)
+
+Read model output from NetCDF files that are global and convert to MeshArray instance.
+```
+"""
+function read_netcdf(fileName::String,fldName::String,mygrid::gcmgrid)
+    if (mygrid.class!="LatLonCap")||(mygrid.ioSize!=[90 1170])
+        error("non-llc90 cases not implemented yet")
+    end
+
+    fileIn= fileName #@sprintf("%s.%04d.nc",fileName,1)
+    #    println(fileIn)
+    xglobal = ncread(fileIn,fldName)
+    s = [size(xglobal,i) for i in 1:ndims(xglobal)]
+    n=length(size(xglobal))
+    
+    # manually, drop dimension 5.
+    if n == 5
+        xglobal = xglobal[:,:,:,:,1]
+        n = ndims(xglobal)
+    end
+    f0=Array{Float64}(undef,90,0,s[4])
+    f00=Array{Float64}(undef,0,90,s[4])
+    f=[f0,f0,f0,f00,f00]
+
+    # take the 13 tiles and put them into 5 faces
+    #xarray = Array{Float64}(undef,90,1170,50)
+    f[1] = cat(xglobal[:,:,1,:],xglobal[:,:,2,:],xglobal[:,:,3,:];dims=2)
+    f[2] = cat(xglobal[:,:,4,:],xglobal[:,:,5,:],xglobal[:,:,6,:];dims=2)
+    f[3] = xglobal[:,:,7,:];
+    f[4] = cat(xglobal[:,:,8,:],xglobal[:,:,9,:],xglobal[:,:,10,:];dims=1)
+    f[5] = cat(xglobal[:,:,11,:],xglobal[:,:,12,:],xglobal[:,:,13,:];dims=1)
 
     fld=MeshArray(mygrid,f)
     return fld
